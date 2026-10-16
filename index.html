@@ -7,14 +7,20 @@
     <title>KASAP</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calculator.css">
+    <link rel="stylesheet" href="css/scanner.css">
 </head>
 
 <body>
 
     <div class="header-container">
-        <h1 class="red-text">MIETHA</h1>
+        <h1 class="red-text">KASAP</h1>
         <span class="deer-icon">🦌</span>
-        <h1 class="logo-text">KASAP</h1>
+    </div>
+
+    <div class="actions-bar">
+        <button id="openScannerBtn" class="action-btn scan-btn">
+            <span class="btn-icon">📸</span> Fiyat Listesi Tara
+        </button>
     </div>
 
     <div class="content-wrapper">
@@ -187,8 +193,59 @@
         </div>
     </div>
 
+    <!-- Scanner Modal -->
+    <div id="scannerModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📸 Fotoğraftan Fiyat Listesi Tara</h3>
+                <button id="closeScannerBtn" class="modal-close-btn">&times;</button>
+            </div>
+
+            <!-- Drag & Drop Zone -->
+            <div id="dropZone" class="drop-zone">
+                <span class="drop-zone-icon">📁</span>
+                <div class="drop-zone-text">Fotoğrafı buraya sürükleyin veya tıklayıp seçin</div>
+                <div class="drop-zone-subtext">PNG, JPG, WebP veya ekran görüntüsünü <strong>Ctrl+V</strong> ile yapıştırın</div>
+                <input type="file" id="fileInput" class="file-input" accept="image/*">
+            </div>
+
+            <!-- Image Preview -->
+            <div id="imagePreviewContainer" class="image-preview-container">
+                <img id="imagePreview" class="image-preview-img" alt="Önizleme">
+                <button id="removeImgBtn" class="remove-img-btn" title="Görseli Kaldır">&times;</button>
+            </div>
+
+            <!-- Loading & Progress Bar -->
+            <div id="scanLoading" class="scan-loading">
+                <div class="spinner"></div>
+                <div id="loadingText" class="loading-text">Yazılar ve fiyatlar taranıyor...</div>
+                <div class="progress-container">
+                    <div id="scanProgressBar" class="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- Results List -->
+            <div id="scanResults" class="scan-results">
+                <div class="results-header">
+                    <span>✅</span> <span id="resultsCount">0 Ürün Bulundu</span>
+                </div>
+                <div id="resultsList" class="results-list"></div>
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button id="applyPricesBtn" class="btn-primary">Fiyatları Uygula</button>
+                </div>
+            </div>
+
+            <div class="modal-actions" style="margin-top: 15px;">
+                <button id="startScanBtn" class="btn-primary" disabled>Taramayı Başlat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tesseract.js (Client-side OCR - No API Key Needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/calculator.js"></script>
+    <script src="js/scanner.js"></script>
 </body>
 
 </html>
